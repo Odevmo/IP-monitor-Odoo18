@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-model_network_ip_access,network.ip Access,model_network_ip,base.group_system,1,1,1,1
+access_user_ip_manager,User IP Access Manager,model_user_ip,network_ip_monitor.group_network_ip_manager,1,1,1,1
+access_user_ip_admin,User IP Access Admin,model_user_ip,base.group_system,1,1,1,1
+access_user_ip_user,User IP Access User,model_user_ip,,1,0,0,0

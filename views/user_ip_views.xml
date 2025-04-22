@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="user_ip_view_list" model="ir.ui.view">
+        <field name="name">user.ip.view.list</field>
+        <field name="model">user.ip</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list string="User IP Addresses">
+                <field name="user_id"/>
+                <field name="ip_address"/>
+                <field name="is_tor_exit"/>
+                <field name="last_seen"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="user_ip_view_form" model="ir.ui.view">
+        <field name="name">user.ip.view.form</field>
+        <field name="model">user.ip</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="User IP Address">
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="ip_address"/>
+                        <field name="last_seen"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="user_ip_action">
+        <field name="name">User IP Addresses</field>
+        <field name="res_model">user.ip</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="network_ip_menu_root" name="Network Monitor" sequence="10" groups="base.group_system,network_ip_monitor.group_network_ip_manager"/>
+
+    <menuitem id="user_ip_menu" name="User IPs" parent="network_ip_menu_root" action="user_ip_action" sequence="20" groups="base.group_system,network_ip_monitor.group_network_ip_manager"/>
+</odoo>
