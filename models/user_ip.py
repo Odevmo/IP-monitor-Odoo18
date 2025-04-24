@@ -11,7 +11,7 @@ class UserIp(models.Model):
     user_id = fields.Many2one('res.users', string='User', required=True, ondelete='cascade', index=True)
     ip_address = fields.Char(string='IP Address', required=True, index=True)
     last_seen = fields.Datetime(string='Last Seen', default=fields.Datetime.now)
-    is_tor_exit = fields.Boolean(string='Tor Exit Node', readonly=True, default=False)
+    is_tor_exit = fields.Boolean(string='IP of Tor-exit-node ? (default:false)', readonly=True)
 
     _sql_constraints = [
         ('user_ip_unique', 'unique(user_id, ip_address)', 'Each user must have a unique IP address recorded.'),
@@ -21,9 +21,8 @@ class UserIp(models.Model):
         try:
             url = f'https://check.torproject.org/api/ip/{ip_address}'
             response = requests.get(url, timeout=5)
-            response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+            response.raise_for_status()
             data = response.json()
-            print("responce is: ", data )
             return data.get('IsTor', False)
         except requests.exceptions.RequestException as e:
             print(f"Error checking Tor exit node for {ip_address}: {e}")

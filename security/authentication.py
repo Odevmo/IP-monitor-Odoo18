@@ -10,9 +10,5 @@ class ResUsers(models.Model):
         if res and self.env.user:
             if request and request.httprequest:
                 ip_address = request.httprequest.remote_addr
-
-                ## DEBUG ##
-                print(f"LOGIN IP ADDRESS CAPTURED: {ip_address} FOR USER: {self.env.user.id}")
-
                 self.env['user.ip'].sudo().record_user_ip_manual(self.env.user.id, ip_address)
         return res
